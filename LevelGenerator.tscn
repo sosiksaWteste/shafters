@@ -1,0 +1,76 @@
+[gd_scene load_steps=8 format=3 uid="uid://dixx4567coyp2"]
+
+[ext_resource type="Texture2D" uid="uid://bxgbhs6retuhf" path="res://textures/floor.png" id="1"]
+[ext_resource type="Script" uid="uid://cng3s1jp152nh" path="res://LevelGenerator.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://mmcd2qok03tc" path="res://textures/wall.png" id="3"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ss8ix"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ss8ix"]
+texture = ExtResource("1")
+margins = Vector2i(32, 32)
+texture_region_size = Vector2i(32, 32)
+0:0/next_alternative_id = 8
+0:0/0 = 0
+0:0/1 = 1
+0:0/1/flip_h = true
+0:0/2 = 2
+0:0/2/flip_v = true
+0:0/3 = 3
+0:0/3/flip_h = true
+0:0/3/flip_v = true
+0:0/4 = 4
+0:0/4/transpose = true
+0:0/5 = 5
+0:0/5/flip_h = true
+0:0/5/transpose = true
+0:0/6 = 6
+0:0/6/flip_v = true
+0:0/6/transpose = true
+0:0/7 = 7
+0:0/7/flip_h = true
+0:0/7/flip_v = true
+0:0/7/transpose = true
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yjj0d"]
+texture = ExtResource("3")
+margins = Vector2i(32, 32)
+texture_region_size = Vector2i(32, 32)
+0:0/next_alternative_id = 8
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+0:0/1 = 1
+0:0/1/flip_h = true
+0:0/2 = 2
+0:0/2/flip_v = true
+0:0/3 = 3
+0:0/3/flip_h = true
+0:0/3/flip_v = true
+0:0/4 = 4
+0:0/4/transpose = true
+0:0/5 = 5
+0:0/5/flip_h = true
+0:0/5/transpose = true
+0:0/6 = 6
+0:0/6/flip_v = true
+0:0/6/transpose = true
+0:0/7 = 7
+0:0/7/flip_h = true
+0:0/7/flip_v = true
+0:0/7/transpose = true
+
+[sub_resource type="TileSet" id="2"]
+resource_name = "floor"
+tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 1
+physics_layer_0/physics_material = SubResource("PhysicsMaterial_ss8ix")
+sources/0 = SubResource("TileSetAtlasSource_ss8ix")
+sources/1 = SubResource("TileSetAtlasSource_yjj0d")
+
+[node name="LevelGenerator" type="Node2D"]
+script = ExtResource("2")
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("2")
+rendering_quadrant_size = 128
+format = 2
