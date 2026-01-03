@@ -11,13 +11,13 @@ var flashlight_on = true
 
 @onready var flashlight = $FlashlightPointLight2D
 @onready var flashlight2 = $FlashlightPointLight2D2
+@onready var power_bar = $CanvasLayer/MarginContainer/VBoxContainer/ProgressBar
 
 func _ready():
 	var bleed := Bleed.new(21)
 	$Limbs/Lleg.add_affliction(bleed)
 	affliction_ui = get_tree().current_scene.get_node("CanvasLayer/AfflictionsUI")
 	queue_redraw()
-	
 	update_flashlight()
 
 func _physics_process(delta):
@@ -39,6 +39,9 @@ func _physics_process(delta):
 	move_and_slide()
 
 func update_flashlight():
+	# Update power bar
+	power_bar.value = flashlight_power
+	
 	if flashlight_power <= 0:
 		# Turn off flashlight at 0%
 		flashlight.enabled = false
@@ -47,13 +50,19 @@ func update_flashlight():
 		flashlight.enabled = true
 		flashlight2.enabled = true
 		
-		# Scale energy from MAX (4.0) at 100% to MIN (2.0) at 0%
-		var power_percent = flashlight_power / 100.0
-		var energy = lerp(MIN_FLASHLIGHT_ENERGY, MAX_FLASHLIGHT_ENERGY, power_percent)
+		var energy
+		if flashlight_power > 10:
+			# 100% -> 10%: scale from 4.0 to 2.0
+			var normalized = (flashlight_power - 10) / 90.0  # 0 to 1 range
+			energy = lerp(1.5, MAX_FLASHLIGHT_ENERGY, normalized)
+		else:
+			# 10% -> 0%: scale from 2.0 to 0.5
+			var normalized = flashlight_power / 10.0  # 0 to 1 range
+			energy = lerp(MIN_FLASHLIGHT_ENERGY, 1.5, normalized)
 		
 		flashlight.energy = energy
 		# Scale the second flashlight proportionally (it was 0.15 relative to 4.0)
-		flashlight2.energy = energy * 0.0375
+		flashlight2.energy = energy * 0.05
 
 func _draw():
 	draw_circle(Vector2.ZERO, 15, Color.RED)
