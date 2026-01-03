@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://dixx4567coyp2"]
+[gd_scene load_steps=9 format=3 uid="uid://dixx4567coyp2"]
 
 [ext_resource type="Texture2D" uid="uid://bxgbhs6retuhf" path="res://textures/floor.png" id="1"]
 [ext_resource type="Script" uid="uid://cng3s1jp152nh" path="res://LevelGenerator.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://mmcd2qok03tc" path="res://textures/wall.png" id="3"]
+[ext_resource type="Script" uid="uid://dyp3snykmhd7k" path="res://afflictions_ui.gd" id="4_yjj0d"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ss8ix"]
 
@@ -74,3 +75,36 @@ script = ExtResource("2")
 tile_set = SubResource("2")
 rendering_quadrant_size = 128
 format = 2
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="AfflictionsUI" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+grow_horizontal = 2
+script = ExtResource("4_yjj0d")
+
+[node name="Panel" type="Panel" parent="CanvasLayer/AfflictionsUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/AfflictionsUI/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/AfflictionsUI/Panel/HBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/AfflictionsUI/Panel/HBoxContainer"]
+layout_mode = 2
