@@ -33,7 +33,7 @@ shadow_filter_smooth = 50.0
 texture = SubResource("GradientTexture2D_kpjcp")
 
 [node name="FlashlightPointLight2D" type="PointLight2D" parent="."]
-energy = 3.0
+energy = 4.0
 shadow_enabled = true
 shadow_filter_smooth = 10.0
 texture = ExtResource("2_kpjcp")
