@@ -1,32 +1,32 @@
-[gd_scene load_steps=9 format=3 uid="uid://dixx4567coyp2"]
+[gd_scene load_steps=11 format=3 uid="uid://dixx4567coyp2"]
 
-[ext_resource type="Texture2D" uid="uid://bxgbhs6retuhf" path="res://textures/floor.png" id="1"]
 [ext_resource type="Script" uid="uid://cng3s1jp152nh" path="res://LevelGenerator.gd" id="2"]
-[ext_resource type="Texture2D" uid="uid://mmcd2qok03tc" path="res://textures/wall.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://bl2dlsilox6x7" path="res://textures/Floor1.png" id="2_ss8ix"]
+[ext_resource type="Texture2D" uid="uid://l2nuwnso46y7" path="res://textures/Wall1.png" id="3_yjj0d"]
+[ext_resource type="Texture2D" uid="uid://djr2krgqfd48b" path="res://textures/void.png" id="4_qgnin"]
 [ext_resource type="Script" uid="uid://dyp3snykmhd7k" path="res://afflictions_ui.gd" id="4_yjj0d"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ss8ix"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ss8ix"]
-texture = ExtResource("1")
-margins = Vector2i(32, 32)
+texture = ExtResource("2_ss8ix")
 texture_region_size = Vector2i(32, 32)
-0:0/next_alternative_id = 8
+0:0/next_alternative_id = 16
 0:0/0 = 0
 0:0/1 = 1
-0:0/1/flip_h = true
+0:0/1/flip_v = true
 0:0/2 = 2
-0:0/2/flip_v = true
+0:0/2/flip_h = true
 0:0/3 = 3
-0:0/3/flip_h = true
 0:0/3/flip_v = true
+0:0/3/transpose = true
 0:0/4 = 4
 0:0/4/transpose = true
 0:0/5 = 5
 0:0/5/flip_h = true
-0:0/5/transpose = true
+0:0/5/flip_v = true
 0:0/6 = 6
-0:0/6/flip_v = true
+0:0/6/flip_h = true
 0:0/6/transpose = true
 0:0/7 = 7
 0:0/7/flip_h = true
@@ -34,49 +34,66 @@ texture_region_size = Vector2i(32, 32)
 0:0/7/transpose = true
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yjj0d"]
-texture = ExtResource("3")
-margins = Vector2i(32, 32)
-texture_region_size = Vector2i(32, 32)
-0:0/next_alternative_id = 8
+texture = ExtResource("3_yjj0d")
+texture_region_size = Vector2i(42, 42)
+0:0/next_alternative_id = 9
 0:0/0 = 0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+0:0/0/z_index = 1
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, -16, 16, 16, 16, 16, -16)
 0:0/1 = 1
 0:0/1/flip_h = true
+0:0/1/z_index = 1
+0:0/1/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, -16, 16, 16, 16, 16, -16)
 0:0/2 = 2
 0:0/2/flip_v = true
+0:0/2/z_index = 1
+0:0/2/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, -16, 16, 16, 16, 16, -16)
 0:0/3 = 3
-0:0/3/flip_h = true
-0:0/3/flip_v = true
+0:0/3/transpose = true
+0:0/3/z_index = 1
+0:0/3/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, -16, 16, 16, 16, 16, -16)
 0:0/4 = 4
-0:0/4/transpose = true
+0:0/4/flip_h = true
+0:0/4/flip_v = true
+0:0/4/z_index = 1
+0:0/4/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, -16, 16, 16, 16, 16, -16)
 0:0/5 = 5
-0:0/5/flip_h = true
+0:0/5/flip_v = true
 0:0/5/transpose = true
+0:0/5/z_index = 1
+0:0/5/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, -16, 16, 16, 16, 16, -16)
 0:0/6 = 6
-0:0/6/flip_v = true
+0:0/6/flip_h = true
 0:0/6/transpose = true
+0:0/6/z_index = 1
+0:0/6/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, -16, 16, 16, 16, 16, -16)
 0:0/7 = 7
 0:0/7/flip_h = true
 0:0/7/flip_v = true
 0:0/7/transpose = true
+0:0/7/z_index = 1
+0:0/7/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k3mma"]
+texture = ExtResource("4_qgnin")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, -16, 16, 16, 16, 16, -16)
 
 [sub_resource type="TileSet" id="2"]
-resource_name = "floor"
+resource_name = "Floor1"
 tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
 physics_layer_0/physics_material = SubResource("PhysicsMaterial_ss8ix")
 sources/0 = SubResource("TileSetAtlasSource_ss8ix")
 sources/1 = SubResource("TileSetAtlasSource_yjj0d")
+sources/2 = SubResource("TileSetAtlasSource_k3mma")
 
 [node name="LevelGenerator" type="Node2D"]
 script = ExtResource("2")
 
-[node name="TileMap" type="TileMap" parent="."]
-tile_set = SubResource("2")
-rendering_quadrant_size = 128
-format = 2
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 0
 
 [node name="AfflictionsUI" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -108,3 +125,19 @@ layout_mode = 2
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/AfflictionsUI/Panel/HBoxContainer"]
 layout_mode = 2
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("2")
+rendering_quadrant_size = 128
+format = 2
+
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="Background"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
