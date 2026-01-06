@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="PlaceableItem" load_steps=3 format=3 uid="uid://dbuh7gd8d5wwf"]
+
+[ext_resource type="Script" uid="uid://d4vj3531k3fr" path="res://items/placeable_item.gd" id="1_fnrso"]
+[ext_resource type="PackedScene" uid="uid://bcnks4j0u8dsg" path="res://props/chest/chest.tscn" id="1_wfoif"]
+
+[resource]
+script = ExtResource("1_fnrso")
+placeable_scene = ExtResource("1_wfoif")
+name = "Chest"
+metadata/_custom_type_script = "uid://d4vj3531k3fr"

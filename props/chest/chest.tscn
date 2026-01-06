@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bcnks4j0u8dsg"]
+
+[ext_resource type="Script" uid="uid://vj1iypbiicof" path="res://props/chest/chest.gd" id="1_mqllg"]
+[ext_resource type="Script" uid="uid://b8253vbys3mgy" path="res://components/inventory.gd" id="2_xws33"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mqllg"]
+
+[node name="Chest" type="StaticBody2D"]
+script = ExtResource("1_mqllg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_mqllg")
+
+[node name="Inventory" type="Node" parent="."]
+script = ExtResource("2_xws33")
+capacity = 30

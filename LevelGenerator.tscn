@@ -1,10 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://dixx4567coyp2"]
+[gd_scene load_steps=14 format=3 uid="uid://dixx4567coyp2"]
 
 [ext_resource type="Script" uid="uid://cng3s1jp152nh" path="res://LevelGenerator.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://bl2dlsilox6x7" path="res://textures/Floor1.png" id="2_ss8ix"]
 [ext_resource type="Texture2D" uid="uid://l2nuwnso46y7" path="res://textures/Wall1.png" id="3_yjj0d"]
 [ext_resource type="Texture2D" uid="uid://djr2krgqfd48b" path="res://textures/void.png" id="4_qgnin"]
 [ext_resource type="Script" uid="uid://dyp3snykmhd7k" path="res://afflictions_ui.gd" id="4_yjj0d"]
+[ext_resource type="PackedScene" uid="uid://cqrq1m43p6r0m" path="res://items/pickup/pickup.tscn" id="5_k3mma"]
+[ext_resource type="Resource" uid="uid://i66oqspo1ckn" path="res://items/resources/generator_item.tres" id="6_nweq4"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ss8ix"]
 
@@ -33,13 +35,17 @@ texture_region_size = Vector2i(32, 32)
 0:0/7/flip_v = true
 0:0/7/transpose = true
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ss8ix"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yjj0d"]
 texture = ExtResource("3_yjj0d")
 texture_region_size = Vector2i(42, 42)
 0:0/next_alternative_id = 9
 0:0/0 = 0
 0:0/0/z_index = 1
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, -16, 16, 16, 16, 16, -16)
+0:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_ss8ix")
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 0:0/1 = 1
 0:0/1/flip_h = true
 0:0/1/z_index = 1
@@ -83,6 +89,7 @@ texture_region_size = Vector2i(32, 32)
 [sub_resource type="TileSet" id="2"]
 resource_name = "Floor1"
 tile_size = Vector2i(32, 32)
+occlusion_layer_0/light_mask = 1
 physics_layer_0/collision_layer = 1
 physics_layer_0/physics_material = SubResource("PhysicsMaterial_ss8ix")
 sources/0 = SubResource("TileSetAtlasSource_ss8ix")
@@ -131,13 +138,8 @@ tile_set = SubResource("2")
 rendering_quadrant_size = 128
 format = 2
 
-[node name="Background" type="CanvasLayer" parent="."]
-layer = -1
-
-[node name="ColorRect" type="ColorRect" parent="Background"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Darkness" type="CanvasModulate" parent="."]
 color = Color(0, 0, 0, 1)
+
+[node name="Pickup" parent="." instance=ExtResource("5_k3mma")]
+item_data = ExtResource("6_nweq4")

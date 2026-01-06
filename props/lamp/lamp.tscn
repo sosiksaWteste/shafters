@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://d02annu2m54e"]
+
+[ext_resource type="Script" uid="uid://u4boihd43en8" path="res://props/lamp/lamp.gd" id="1_7omg3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_aseqk"]
+radius = 15.0
+
+[sub_resource type="Gradient" id="Gradient_bp42k"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_osgc5"]
+gradient = SubResource("Gradient_bp42k")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7omg3"]
+radius = 8.0
+
+[node name="Lamp" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 0
+input_pickable = true
+script = ExtResource("1_7omg3")
+
+[node name="InteractionArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+shape = SubResource("CircleShape2D_aseqk")
+
+[node name="LampPointLight2D" type="PointLight2D" parent="."]
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_osgc5")
+texture_scale = 4.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_7omg3")
+
+[node name="LampPointLight2D2" type="PointLight2D" parent="."]
+texture = SubResource("GradientTexture2D_osgc5")
+texture_scale = 4.0

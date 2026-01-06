@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="PlaceableItem" load_steps=3 format=3 uid="uid://i66oqspo1ckn"]
+
+[ext_resource type="PackedScene" uid="uid://ljl6b5e3r6v2" path="res://props/generator/generator.tscn" id="1_ueqlu"]
+[ext_resource type="Script" uid="uid://d4vj3531k3fr" path="res://items/placeable_item.gd" id="1_w77wh"]
+
+[resource]
+script = ExtResource("1_w77wh")
+placeable_scene = ExtResource("1_ueqlu")
+name = "Generator"
+metadata/_custom_type_script = "uid://d4vj3531k3fr"

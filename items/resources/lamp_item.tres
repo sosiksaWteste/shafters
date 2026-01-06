@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="PlaceableItem" load_steps=3 format=3 uid="uid://br20f7djyqrxt"]
+
+[ext_resource type="PackedScene" uid="uid://d02annu2m54e" path="res://props/lamp/lamp.tscn" id="1_5qkp2"]
+[ext_resource type="Script" uid="uid://d4vj3531k3fr" path="res://items/placeable_item.gd" id="1_dhcfi"]
+
+[resource]
+script = ExtResource("1_dhcfi")
+placeable_scene = ExtResource("1_5qkp2")
+name = "Lamp"
+stackable = true
+max_stack_size = 5
+metadata/_custom_type_script = "uid://d4vj3531k3fr"
