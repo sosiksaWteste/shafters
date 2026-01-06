@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://dy0w1yts3nu62"]
+
+[ext_resource type="Script" uid="uid://dxfoudnvwpbwt" path="res://ui/slot.gd" id="1_01pef"]
+
+[node name="Button" type="Button"]
+custom_minimum_size = Vector2(64, 64)
+offset_right = 8.0
+offset_bottom = 8.0
+script = ExtResource("1_01pef")
+
+[node name="Icon" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="QuantityLabel" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
