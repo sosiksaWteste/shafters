@@ -13,6 +13,8 @@ var is_connected = false  # Whether lamp is connected to a generator
 @onready var interaction_area = $InteractionArea
 @onready var light = $LampPointLight2D
 @onready var light2 = $LampPointLight2D2
+var light_area: Area2D
+var light_collision: CollisionShape2D
 
 func _ready() -> void:
 	# Connect interaction area signals
@@ -23,7 +25,20 @@ func _ready() -> void:
 	if ConnectionManager:
 		clicked.connect(ConnectionManager.on_lamp_clicked)
 	
+	light_area = Area2D.new()
+	light_area.name = "LightArea2D"
+	light_area.monitorable = true
+	light_area.monitoring = is_on
+	add_child(light_area)
+	light_area.add_to_group("light_areas")  # enemies can find all lights
+
+	light_collision = CollisionShape2D.new()
+	var circle = CircleShape2D.new()
+	light_collision.shape = circle
+	light_area.add_child(light_collision)
+	light_collision.disabled = not is_on  # off when lamp off
 	update_visual()
+	
 
 func _draw():
 	# Draw small 8x8 rectangle lamp
@@ -53,7 +68,7 @@ func turn_off():
 		lamp_toggled.emit(false)
 
 func update_visual():
-	queue_redraw()  # Redraw the rectangle
+	queue_redraw()  # redraw lamp rectangle
 	
 	if light:
 		light.enabled = is_on
@@ -63,6 +78,15 @@ func update_visual():
 			light.energy = 4.0
 			light2.color = Color.YELLOW
 			light2.energy = 0.15
+
+	# --- Sync the collision area ---
+	if light_area and light_collision:
+		light_area.monitoring = is_on
+		light_collision.disabled = not is_on
+		# Update radius to match visual light energy
+		var circle = light_collision.shape as CircleShape2D
+		circle.radius = light.energy * 35
+
 
 func on_generator_state_changed(generator_is_on: bool):
 	# Called when connected generator changes state

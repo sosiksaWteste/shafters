@@ -1,4 +1,5 @@
 extends CharacterBody2D
+signal request_tile_break(target_pos)
 
 const SPEED = 150.0
 @export var affliction_ui: AfflictionDisplay
@@ -8,6 +9,7 @@ const POWER_DRAIN_RATE = 5.0  # Power per second when flashlight is on
 
 var flashlight_power = 100.0  # 0-100%
 var flashlight_on = true
+var break_range = 64.0
 
 # Generator spawning
 var generator_scene = preload("res://props/generator/generator.tscn")
@@ -81,27 +83,30 @@ func update_flashlight():
 	# Update power bar
 	power_bar.value = flashlight_power
 	
-	if flashlight_power <= 0:
-		# Turn off flashlight at 0%
-		flashlight.enabled = false
-		flashlight2.enabled = false
-	else:
-		flashlight.enabled = true
-		flashlight2.enabled = true
-		
+	var flashlight_active = flashlight_power > 0 and flashlight_on
+	
+	# Enable/disable the visual light
+	flashlight.enabled = flashlight_active
+	flashlight2.enabled = flashlight_active
+	
+	# Enable/disable Area2D collision detection
+	if $FlashlightPointLight2D/LightArea2D:
+		$FlashlightPointLight2D/LightArea2D.monitoring = flashlight_active
+		$FlashlightPointLight2D/LightArea2D/CollisionPolygon2D.visible = flashlight_active
+	
+	# Adjust energy only if light is on
+	if flashlight_active:
 		var energy
 		if flashlight_power > 10:
-			# 100% -> 10%: scale from 4.0 to 2.0
-			var normalized = (flashlight_power - 10) / 90.0  # 0 to 1 range
+			var normalized = (flashlight_power - 10) / 90.0
 			energy = lerp(1.5, MAX_FLASHLIGHT_ENERGY, normalized)
 		else:
-			# 10% -> 0%: scale from 2.0 to 0.5
-			var normalized = flashlight_power / 10.0  # 0 to 1 range
+			var normalized = flashlight_power / 10.0
 			energy = lerp(MIN_FLASHLIGHT_ENERGY, 1.5, normalized)
 		
 		flashlight.energy = energy
-		# Scale the second flashlight proportionally (it was 0.15 relative to 4.0)
 		flashlight2.energy = energy * 0.05
+
 
 func _draw():
 	draw_circle(Vector2.ZERO, 10, Color.RED)
@@ -130,6 +135,9 @@ func spawn_lamp():
 	print("Lamp spawned at: ", lamp.global_position)
 	
 func _input(event: InputEvent):
+	if event.is_action_pressed("attack"):  # Replace with your input action
+		destroy_tile()
+	
 	# Spawn generator with "g" key
 	if event is InputEventKey and event.pressed and event.keycode == KEY_G:
 		spawn_generator()
@@ -160,6 +168,7 @@ func _on_ui_item_triggered(slot_data: SlotData, index: int):
 # Вызывается при ПКМ в инвентаре
 func _on_ui_item_dropped(index: int):
 	drop_item(index)
+	
 
 # Основная логика использования предмета по индексу слота
 func use_slot(index: int):
@@ -214,3 +223,15 @@ func drop_item(index: int):
 	
 	# Удаляем ВЕСЬ слот из инвентаря (выбрасываем всю пачку)
 	inventory.remove_slot_at(index)
+
+func destroy_tile():
+	# Convert player position (or mouse position) to world pos
+	var target_pos = get_global_mouse_position()  # Or use player position: global_position
+
+	# Range check
+	if global_position.distance_to(target_pos) > break_range:
+		print("Tile too far to destroy")
+		return
+
+	# Call the LevelGenerator function
+	emit_signal("request_tile_break", target_pos)
