@@ -32,6 +32,7 @@ func _ready():
 	var test_gen = load("res://items/resources/generator_item.tres")
 	var test_lamp = load("res://items/resources/lamp_item.tres")
 	var test_chest = load("res://items/resources/chest_item.tres")
+	var test_bandage = load("res://items/resources/bandage.tres")
 	if test_gen:
 		inventory.add_item(test_gen)
 		print("Test: Generator added to inventory.")
@@ -50,6 +51,12 @@ func _ready():
 		print("Test: Chest added to inventory.")
 	else:
 		print("Test: Failed to load chest item.")
+		
+	if test_bandage:
+		inventory.add_item(test_bandage)
+		print("Test: Bandage added to inventory.")
+	else:
+		print("Test: Failed to load Bandage item.")
 	
 
 func _physics_process(delta):

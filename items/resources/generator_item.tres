@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="PlaceableItem" load_steps=3 format=3 uid="uid://i66oqspo1ckn"]
+[gd_resource type="Resource" script_class="PlaceableItem" load_steps=4 format=3 uid="uid://i66oqspo1ckn"]
 
+[ext_resource type="Texture2D" uid="uid://bxbabewcdv65b" path="res://textures/GeneratorIcon.png" id="1_md8b0"]
 [ext_resource type="PackedScene" uid="uid://ljl6b5e3r6v2" path="res://props/generator/generator.tscn" id="1_ueqlu"]
 [ext_resource type="Script" uid="uid://d4vj3531k3fr" path="res://items/placeable_item.gd" id="1_w77wh"]
 
@@ -7,4 +8,5 @@
 script = ExtResource("1_w77wh")
 placeable_scene = ExtResource("1_ueqlu")
 name = "Generator"
+icon = ExtResource("1_md8b0")
 metadata/_custom_type_script = "uid://d4vj3531k3fr"

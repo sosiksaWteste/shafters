@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="PlaceableItem" load_steps=3 format=3 uid="uid://br20f7djyqrxt"]
+[gd_resource type="Resource" script_class="PlaceableItem" load_steps=4 format=3 uid="uid://br20f7djyqrxt"]
 
 [ext_resource type="PackedScene" uid="uid://d02annu2m54e" path="res://props/lamp/lamp.tscn" id="1_5qkp2"]
+[ext_resource type="Texture2D" uid="uid://d7s2cjyptdkm" path="res://textures/LampIcon.png" id="1_75wkt"]
 [ext_resource type="Script" uid="uid://d4vj3531k3fr" path="res://items/placeable_item.gd" id="1_dhcfi"]
 
 [resource]
@@ -9,4 +10,5 @@ placeable_scene = ExtResource("1_5qkp2")
 name = "Lamp"
 stackable = true
 max_stack_size = 5
+icon = ExtResource("1_75wkt")
 metadata/_custom_type_script = "uid://d4vj3531k3fr"
