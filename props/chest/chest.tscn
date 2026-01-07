@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bcnks4j0u8dsg"]
+[gd_scene load_steps=5 format=3 uid="uid://bcnks4j0u8dsg"]
 
 [ext_resource type="Script" uid="uid://vj1iypbiicof" path="res://props/chest/chest.gd" id="1_mqllg"]
+[ext_resource type="Texture2D" uid="uid://debaw2extj00e" path="res://textures/Chest.png" id="2_1gf84"]
 [ext_resource type="Script" uid="uid://b8253vbys3mgy" path="res://components/inventory.gd" id="2_xws33"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mqllg"]
@@ -9,6 +10,7 @@
 script = ExtResource("1_mqllg")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_1gf84")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_mqllg")

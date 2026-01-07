@@ -42,6 +42,7 @@ func _ready():
 	
 	spawn_player(current_map) 
 	spawn_enemies(current_map, enemy_scene, 10)
+	#spawn_enemy_near_player(enemy_scene)
 	var total_gold = 0
 	while total_gold < 280:
 		total_gold += generate_gold_veins(current_map, 1, 5, 12)

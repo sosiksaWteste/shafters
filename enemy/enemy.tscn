@@ -1,18 +1,56 @@
-[gd_scene load_steps=5 format=3 uid="uid://dtorf4lraouso"]
+[gd_scene load_steps=15 format=3 uid="uid://dtorf4lraouso"]
 
-[ext_resource type="Texture2D" uid="uid://djr2krgqfd48b" path="res://textures/void.png" id="1_2mvqj"]
 [ext_resource type="Script" uid="uid://bhlyqj2fstspm" path="res://enemy/enemy.gd" id="1_ofsxj"]
+[ext_resource type="Texture2D" uid="uid://vhty6w26oxmg" path="res://textures/Void1.png" id="2_pmsee"]
+[ext_resource type="Texture2D" uid="uid://dn3crr2uhnxxv" path="res://textures/Void2.png" id="3_1wwld"]
+[ext_resource type="Texture2D" uid="uid://cs8w547fhq3aj" path="res://textures/VoId3.png" id="4_y5vj3"]
+[ext_resource type="Texture2D" uid="uid://ci2s1lete478x" path="res://textures/Void4.png" id="5_5ffra"]
+[ext_resource type="AudioStream" uid="uid://3ycdga1ci7ii" path="res://SFX/Humm.mp3" id="6_y5vj3"]
+[ext_resource type="AudioStream" uid="uid://b77biix2yfsms" path="res://SFX/Damage.mp3" id="7_y5vj3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ofsxj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ppra6"]
 radius = 20.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_e355f"]
+atlas = ExtResource("2_pmsee")
+region = Rect2(0, 0, 30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_78jik"]
+atlas = ExtResource("3_1wwld")
+region = Rect2(0, 0, 30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o3pv7"]
+atlas = ExtResource("4_y5vj3")
+region = Rect2(0, 0, 30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xoplw"]
+atlas = ExtResource("5_5ffra")
+region = Rect2(0, 0, 30, 30)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gf88j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e355f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_78jik")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o3pv7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xoplw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
 [node name="Enemy" type="CharacterBody2D"]
 script = ExtResource("1_ofsxj")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_2mvqj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ofsxj")
@@ -22,3 +60,25 @@ shape = SubResource("CircleShape2D_ofsxj")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_ppra6")
 debug_color = Color(0.9677177, 0, 0.47551703, 0.41960785)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 10
+sprite_frames = SubResource("SpriteFrames_gf88j")
+autoplay = "default"
+
+[node name="Damage" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_y5vj3")
+volume_db = 8.368
+pitch_scale = 2.5
+max_distance = 40.0
+max_polyphony = 40
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_y5vj3")
+volume_db = 24.0
+pitch_scale = 0.1
+autoplay = true
+max_distance = 300.0
+attenuation = 0.8122519
+panning_strength = 3.0
+parameters/looping = true

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="FlashlightBattery" load_steps=3 format=3 uid="uid://bu0d5xjshtqkk"]
+
+[ext_resource type="Texture2D" uid="uid://drdjl3mqm7cdu" path="res://textures/BatteryIcon.png" id="1_2va5y"]
+[ext_resource type="Script" uid="uid://bvauvqacqgffm" path="res://items/medicalItems/battery.gd" id="1_xfr08"]
+
+[resource]
+script = ExtResource("1_xfr08")
+stackable = true
+max_stack_size = 4
+icon = ExtResource("1_2va5y")
+metadata/_custom_type_script = "uid://c0owm74a6ebtq"

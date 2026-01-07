@@ -9,6 +9,7 @@ var is_fleeing: bool = false
 var flee_target: Vector2 = Vector2.ZERO
 var flee_timer: float = 0.0              # counts down when fleeing
 
+@onready var damage_sound: AudioStreamPlayer2D = $Damage
 @onready var player_instance = get_tree().current_scene.get_node("Player")
 @onready var hit_area: Area2D = $Area2D
 
@@ -72,6 +73,8 @@ func apply_bleed_to_player(player: Node, delta: float) -> void:
 
 	var bleed = Bleed.new(bleed_severity_per_second * delta)
 	limb.add_affliction(bleed)
+	if damage_sound:
+		damage_sound.play()
 
 # -----------------------
 # Movement logic

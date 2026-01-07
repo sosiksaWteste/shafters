@@ -35,21 +35,6 @@ func _ready() -> void:
 	# Draw initial sprite
 	update_visual()
 
-func _draw():
-	# Draw rectangle body
-	draw_rect(Rect2(-16, -16, 32, 32), Color.DARK_SLATE_GRAY)
-	
-	# Draw colored status dot
-	var dot_color = Color.DARK_GRAY
-	if fuel <= 0:
-		dot_color = Color.DARK_GRAY
-	elif is_on:
-		dot_color = Color.LIME_GREEN
-	else:
-		dot_color = Color.DARK_RED
-	
-	draw_circle(Vector2.ZERO, 8, dot_color)
-
 func _process(delta: float) -> void:
 	# Handle player interaction input
 	if player_in_range and Input.is_action_just_pressed("ui_accept"):
@@ -119,11 +104,11 @@ func update_visual():
 		elif is_on:
 			light.enabled = true
 			light.color = Color.LIME_GREEN
-			light.energy = 3
+			light.energy = 1
 		else:
 			light.enabled = true
 			light.color = Color.RED
-			light.energy = 3
+			light.energy = 1
 
 func _on_body_entered(body):
 	if body.name == "Player":

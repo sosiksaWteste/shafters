@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://br874w1tggjcs"]
+[gd_scene load_steps=20 format=3 uid="uid://br874w1tggjcs"]
 
 [ext_resource type="Script" uid="uid://druor4k332g8o" path="res://player.gd" id="1_xhfnw"]
 [ext_resource type="Script" uid="uid://rxeltvf4ve20" path="res://limb.gd" id="2_kpjcp"]
@@ -6,6 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://c5a46qc4wu8qh" path="res://inventory_ui.tscn" id="4_cxr5p"]
 [ext_resource type="Script" uid="uid://b8253vbys3mgy" path="res://components/inventory.gd" id="4_e80uo"]
 [ext_resource type="Script" uid="uid://5mbkgufa4cdm" path="res://lightCone.gd" id="4_tdg3f"]
+[ext_resource type="Texture2D" uid="uid://ckxj3wldyokjb" path="res://textures/Miner.png" id="7_dtqjt"]
+[ext_resource type="Texture2D" uid="uid://b0iqa1sncgk2n" path="res://textures/MinerFrame2.png" id="8_5ncpa"]
+[ext_resource type="Texture2D" uid="uid://ctn8aoc4mdx5v" path="res://textures/MinerFrame3.png" id="9_wi0c6"]
+[ext_resource type="AudioStream" uid="uid://3mknf0sp2lam" path="res://SFX/Hurt.mp3" id="10_hp6x6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kpjcp"]
 
@@ -43,6 +47,40 @@ corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hp6x6"]
+atlas = ExtResource("7_dtqjt")
+region = Rect2(0, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wi0c6"]
+atlas = ExtResource("8_5ncpa")
+region = Rect2(0, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3tkgg"]
+atlas = ExtResource("9_wi0c6")
+region = Rect2(0, 0, 40, 40)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hp6x6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hp6x6")
+}],
+"loop": true,
+"name": &"Default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wi0c6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3tkgg")
+}],
+"loop": true,
+"name": &"Walk",
+"speed": 5.0
+}]
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_xhfnw")
@@ -131,3 +169,24 @@ value = 100.0
 
 [node name="Inventory" type="Node" parent="."]
 script = ExtResource("4_e80uo")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 9
+rotation = 1.5707964
+sprite_frames = SubResource("SpriteFrames_hp6x6")
+animation = &"Walk"
+autoplay = "Default"
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Footstep1" type="AudioStreamPlayer2D" parent="Node2D"]
+
+[node name="Footstep2" type="AudioStreamPlayer2D" parent="Node2D"]
+
+[node name="Footstep3" type="AudioStreamPlayer2D" parent="Node2D"]
+
+[node name="Hurt" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_hp6x6")
+volume_db = -2.052
+pitch_scale = 0.88
+parameters/looping = false

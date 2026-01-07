@@ -1,13 +1,13 @@
 [gd_scene load_steps=9 format=3 uid="uid://ljl6b5e3r6v2"]
 
 [ext_resource type="Script" uid="uid://bcjcolf20tjs7" path="res://props/generator/generator.gd" id="1_eqda4"]
+[ext_resource type="Texture2D" uid="uid://biphtxt1khg5t" path="res://textures/Generator.png" id="2_x6oqs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x6oqs"]
+size = Vector2(30, 30)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rn8di"]
 radius = 30.0
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_eqda4"]
 
 [sub_resource type="Gradient" id="Gradient_eqda4"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
@@ -47,7 +47,7 @@ shape = SubResource("RectangleShape2D_x6oqs")
 shape = SubResource("CircleShape2D_rn8di")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = SubResource("CanvasTexture_eqda4")
+texture = ExtResource("2_x6oqs")
 
 [node name="FuelTimer" type="Timer" parent="."]
 

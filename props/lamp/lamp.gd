@@ -18,9 +18,6 @@ var light_collision: CollisionShape2D
 
 func _ready() -> void:
 	# Connect interaction area signals
-	if interaction_area:
-		interaction_area.body_entered.connect(_on_body_entered)
-		interaction_area.body_exited.connect(_on_body_exited)
 
 	if ConnectionManager:
 		clicked.connect(ConnectionManager.on_lamp_clicked)
@@ -95,14 +92,6 @@ func on_generator_state_changed(generator_is_on: bool):
 			turn_on()
 		else:
 			turn_off()
-
-func _on_body_entered(body):
-	if body.name == "Player":
-		player_in_range = true
-
-func _on_body_exited(body):
-	if body.name == "Player":
-		player_in_range = false
 
 func _input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.pressed:

@@ -1,7 +1,11 @@
 extends CharacterBody2D
 signal request_tile_break(target_pos)
 
+var soundCount = 0
 var death_label: Label
+var footstep_timer = 0.0
+var footstep_sounds = preload("res://SFX/Footstep.mp3")
+const FOOTSTEP_INTERVAL = 0.4
 
 const GOLD_ITEM_PATH = "res://items/resources/goldOre.tres"
 @export var required_gold = 20
@@ -21,6 +25,9 @@ var generator_scene = preload("res://props/generator/generator.tscn")
 var lamp_scene = preload("res://props/lamp/lamp.tscn")
 var pickup_scene = preload("res://items/pickup/pickup.tscn")
 
+@onready var flashlight_sound: AudioStreamPlayer2D = $Player
+@onready var footsteps_parent: Node2D = $Node2D
+@onready var sprite := $AnimatedSprite2D
 @onready var flashlight = $FlashlightPointLight2D
 @onready var flashlight2 = $FlashlightPointLight2D2
 @onready var power_bar = $CanvasLayer/MarginContainer/VBoxContainer/ProgressBar
@@ -69,6 +76,14 @@ func _ready():
 	var test_lamp = load("res://items/resources/lamp_item.tres")
 	var test_chest = load("res://items/resources/chest_item.tres")
 	var test_bandage = load("res://items/resources/bandage.tres")
+	var test_battery = load("res://items/resources/battery.tres")
+	if test_battery:
+		inventory.add_item(test_battery)
+		inventory.add_item(test_battery)
+		print("Test: test_battery added to inventory.")
+	else:
+		print("Test: Failed to load test_battery item.")
+	
 	if test_gen:
 		inventory.add_item(test_gen)
 		print("Test: Generator added to inventory.")
@@ -100,13 +115,28 @@ func _physics_process(delta):
 		flashlight_power -= POWER_DRAIN_RATE * delta
 		flashlight_power = max(0, flashlight_power)
 		update_flashlight()
-	
+		# Play flashlight sound if not already playing
+		if flashlight_sound and not flashlight_sound.playing:
+			flashlight_sound.play()
+	else:
+		# Stop flashlight sound if off
+		if flashlight_sound and flashlight_sound.playing:
+			flashlight_sound.stop()
 	var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	
-	if direction:
+	if direction != Vector2.ZERO:
 		velocity = direction * SPEED
+		if sprite.animation != "Walk":
+			sprite.play("Walk")
+		footstep_timer -= delta
+		if footstep_timer <= 0:
+			_play_footstep()
+			footstep_timer = FOOTSTEP_INTERVAL
 	else:
 		velocity = Vector2.ZERO
+		if sprite.animation != "Default":
+			sprite.play("Default")
+		
 
 	look_at(get_global_mouse_position())
 
@@ -139,10 +169,6 @@ func update_flashlight():
 		
 		flashlight.energy = energy
 		flashlight2.energy = energy * 0.05
-
-
-func _draw():
-	draw_circle(Vector2.ZERO, 10, Color.RED)
 
 func spawn_generator():
 	var generator = generator_scene.instantiate()
@@ -282,3 +308,15 @@ func game_won():
 	death_label.visible = true
 	
 	queue_free()
+	
+func _play_footstep():
+	var child_count = footsteps_parent.get_child_count()
+	var player = footsteps_parent.get_child(soundCount) as AudioStreamPlayer2D
+
+	player.stream = footstep_sounds
+	player.play()  # overlapping works if max_polyphony is set
+
+	# Increment counter to cycle through children
+	soundCount += 1
+	if soundCount >= child_count:
+		soundCount = 0
