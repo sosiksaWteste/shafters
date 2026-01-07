@@ -1,10 +1,8 @@
 extends Affliction
 class_name Bleed
 
-# Chance for hurt sound and blood effect to occur each update (0.0 - 1.0)
 const HURT_CHANCE := 0.001
 
-# Preload blood scene
 var BloodScene = preload("res://Blood.tscn")
 
 func _init(_severity := 0.0):
@@ -20,7 +18,6 @@ func update(limb, delta):
 	else:
 		severity += 0.1 * delta
 
-	# Only trigger if severity is high
 	if severity > 80.0:
 		var rng = RandomNumberGenerator.new()
 		rng.randomize()

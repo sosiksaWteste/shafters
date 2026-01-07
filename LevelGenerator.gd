@@ -325,7 +325,3 @@ func drop_gold_at(cell: Vector2i):
 
 	# Add to scene
 	get_parent().add_child(pickup)
-
-	# Temporarily disable pickup (if your Pickup has that function)
-	if pickup.has_method("disable_pickup_temporarily"):
-		pickup.disable_pickup_temporarily(0.7)

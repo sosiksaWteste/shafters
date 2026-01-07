@@ -5,7 +5,7 @@ signal fuel_depleted
 signal clicked(generator)
 
 const MAX_FUEL = 100.0
-const FUEL_CONSUMPTION_RATE = 2.0  # Fuel per second when running
+const FUEL_CONSUMPTION_RATE = 1.0  # Fuel per second when running
 
 var is_on = false
 var fuel = MAX_FUEL

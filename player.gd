@@ -256,7 +256,7 @@ func _spawn_placeable(scene: PackedScene):
 	if scene == null: return
 	
 	var instance = scene.instantiate()
-	instance.global_position = global_position + Vector2(0, 50)
+	instance.global_position = global_position + Vector2(0, 15)
 	get_parent().add_child(instance)
 	
 	print("Построен объект: ", instance.name)
