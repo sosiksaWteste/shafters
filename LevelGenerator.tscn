@@ -109,7 +109,6 @@ texture_region_size = Vector2i(42, 42)
 0:0/7/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_nweq4"]
-load_path = "res://.godot/imported/void.png-d334b30079efa8c17d2154042d6759ab.ctex"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k3mma"]
 texture = SubResource("CompressedTexture2D_nweq4")
@@ -251,15 +250,10 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
-[node name="TileMap" type="TileMap" parent="."]
+[node name="TileMap" type="TileMapLayer" parent="."]
+use_parent_material = true
 tile_set = SubResource("2")
 rendering_quadrant_size = 128
-format = 2
-
-[node name="TileMap" type="TileMap" parent="TileMap"]
-tile_set = SubResource("2")
-rendering_quadrant_size = 128
-format = 2
 
 [node name="Darkness" type="CanvasModulate" parent="."]
 use_parent_material = true

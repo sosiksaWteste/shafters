@@ -13,7 +13,6 @@ config_version=5
 config/name="Shafters"
 run/main_scene="res://LevelGenerator.tscn"
 config/features=PackedStringArray("4.5")
-config/icon="res://icon.png"
 
 [autoload]
 
@@ -85,5 +84,6 @@ ai_assistant_hub/preferences/always_scroll_to_bottom=false
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true
 environment/defaults/default_environment="res://default_env.tres"
 textures/snap/snap_2d_vertices_to_pixel=true

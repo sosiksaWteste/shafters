@@ -12,7 +12,7 @@ const FLOOR_SOURCE_ID = 0
 const WALL_SOURCE_ID = 1
 const GOLD_SOURCE_ID = 3
 
-@onready var tilemap: TileMap = $TileMap
+@onready var tilemap: TileMapLayer = $TileMap
 
 var player_scene = preload("res://player.tscn")
 var player_instance = null
@@ -187,7 +187,7 @@ func reveal_area_from(pos: Vector2i, map: Array):
 		queue.append(Vector2i(x, y - 1))
 
 func draw_map_from_array(map: Array) -> void:
-	tilemap.clear_layer(TILEMAP_LAYER)
+	tilemap.clear()
 
 	for y in range(map.size()):
 		for x in range(map[0].size()):
@@ -198,7 +198,7 @@ func draw_map_from_array(map: Array) -> void:
 					if tile_variations[y][x] == -1:
 						tile_variations[y][x] = 1 + randi() % 7
 					var alt_id = tile_variations[y][x]
-					tilemap.set_cell(TILEMAP_LAYER, Vector2i(x, y), FLOOR_SOURCE_ID, Vector2i(0, 0), alt_id)
+					tilemap.set_cell(Vector2i(x, y), FLOOR_SOURCE_ID, Vector2i(0, 0), alt_id)
 
 				for ny in range(y - 1, y + 2):
 					for nx in range(x - 1, x + 2):
@@ -213,9 +213,9 @@ func draw_map_from_array(map: Array) -> void:
 							var alt_id = tile_variations[ny][nx]
 
 							if neighbor_id == WALL_SOURCE_ID:
-								tilemap.set_cell(TILEMAP_LAYER, Vector2i(nx, ny), WALL_SOURCE_ID, Vector2i(0, 0), alt_id)
+								tilemap.set_cell(Vector2i(nx, ny), WALL_SOURCE_ID, Vector2i(0, 0), alt_id)
 							else:
-								tilemap.set_cell(TILEMAP_LAYER, Vector2i(nx, ny), GOLD_SOURCE_ID, Vector2i(0, 0), alt_id)
+								tilemap.set_cell(Vector2i(nx, ny), GOLD_SOURCE_ID, Vector2i(0, 0), alt_id)
 
 func spawn_player(map: Array):
 	if player_instance:
@@ -261,7 +261,7 @@ func destroy_tile_at_world_pos(world_pos: Vector2) -> void:
 
 	current_map[cell.y][cell.x] = FLOOR_SOURCE_ID
 
-	tilemap.set_cell(TILEMAP_LAYER, cell, FLOOR_SOURCE_ID)
+	tilemap.set_cell(cell, FLOOR_SOURCE_ID)
 
 	reveal_area_from(cell, current_map)
 
